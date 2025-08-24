@@ -82,7 +82,7 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
-
+vim.env.PATH = vim.env.PATH .. '/home/chinh/.config/nvm/versions/node/v22.18.0/bin/node'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -208,7 +208,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 vim.keymap.set('n', '=ap', "ma=ap'a")
 
-vim.keymap.set('x', '<leader>p', [["_dP]])
+vim.keymap.set('x', '<leader>P', [["_dP]])
 -- exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
 
@@ -223,9 +223,11 @@ vim.keymap.set('n', '<space>st', function()
   vim.cmd.vnew()
   vim.cmd.term()
   vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 5)
+  vim.api.nvim_win_set_height(0, 10)
 end)
 
+-- buffers
+vim.keymap.set('n', '<leader>x', ':bd<cr>')
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
@@ -472,7 +474,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
+      vim.keymap.set('n', '<C-p>', function()
         -- You can pass additional configuration to Telescope to change the theme, layout, etc.
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
@@ -953,7 +955,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'python', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'python', 'bash', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'sql' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -1029,16 +1031,16 @@ local ui = require 'harpoon.ui'
 vim.keymap.set('n', '<leader>a', mark.add_file)
 vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
 
-vim.keymap.set('n', '<C-h>', function()
+vim.keymap.set('n', '<C-1>', function()
   ui.nav_file(1)
 end)
-vim.keymap.set('n', '<C-t>', function()
+vim.keymap.set('n', '<C-2>', function()
   ui.nav_file(2)
 end)
-vim.keymap.set('n', '<C-n>', function()
+vim.keymap.set('n', '<C-3>', function()
   ui.nav_file(3)
 end)
-vim.keymap.set('n', '<C-s>', function()
+vim.keymap.set('n', '<C-4>', function()
   ui.nav_file(4)
 end)
 -- The line beneath this is called `modeline`. See `:help modeline`
